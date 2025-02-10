@@ -125,7 +125,7 @@ fun ScoreScreen(
                                     )
                                 }
                             }
-                            }
+                        }
                     }
                 }
             }

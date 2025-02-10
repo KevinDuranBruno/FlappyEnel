@@ -41,7 +41,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.sagrd.flappyenel.R
 import com.sagrd.flappyenel.toLogedUser
-import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
+import com.sagrd.flappyenel.data.local.storage.SessionStorage
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)

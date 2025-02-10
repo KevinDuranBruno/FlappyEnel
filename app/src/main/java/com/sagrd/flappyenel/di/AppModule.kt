@@ -34,7 +34,7 @@ object AppModule {
     @Singleton
     fun provideJugadorApi(moshi: Moshi): JugadorApi {
         return Retrofit.Builder()
-            .baseUrl("https://flappyenews20231115142306.azurewebsites.net/")
+            .baseUrl("https://www.flappyenel.somee.com/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(JugadorApi::class.java)

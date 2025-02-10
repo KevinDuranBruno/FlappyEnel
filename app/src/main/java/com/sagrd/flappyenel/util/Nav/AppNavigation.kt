@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sagrd.flappyenel.ui.GameScreen.GameScreen
-import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
+import com.sagrd.flappyenel.data.local.storage.SessionStorage
 import com.sagrd.flappyenel.ui.LoseScreen.LoseScreen
 import com.sagrd.flappyenel.ui.MenuScreen.MenuScreen
 import com.sagrd.flappyenel.ui.ScoreScreen.ScoreScreen

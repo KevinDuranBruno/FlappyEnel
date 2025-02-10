@@ -1,4 +1,4 @@
-package com.sagrd.flappyenel.ui.GameScreen.storage
+package com.sagrd.flappyenel.data.local.storage
 
 import android.content.Context
 import androidx.datastore.core.DataStore

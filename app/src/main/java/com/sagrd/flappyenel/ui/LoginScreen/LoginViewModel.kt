@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
 import com.sagrd.flappyenel.data.repository.JugadorRepository
 import com.sagrd.flappyenel.player
-import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
+import com.sagrd.flappyenel.data.local.storage.SessionStorage
 import com.sagrd.flappyenel.ui.MenuScreen.exit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

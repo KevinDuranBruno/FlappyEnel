@@ -41,7 +41,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.sagrd.flappyenel.R
 import com.sagrd.flappyenel.toLogedUser
-import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
+import com.sagrd.flappyenel.data.local.storage.SessionStorage
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -127,7 +127,7 @@ fun RegisterModal(
                     IconButton(onClick = { registerViewModel.toRegister(storage=storage) },modifier = Modifier
                         .padding(10.dp)
                         .fillMaxWidth()) {
-                        Image(painter =  painterResource(id = R.drawable.loginbutton), contentDescription ="login")
+                        Image(painter =  painterResource(id = R.drawable.registerbutton), contentDescription ="login")
                     }
                     TextButton(onClick = { toLogedUser=true }) {
                         Text(text = "I have Account",color = Color.Black, fontFamily = fontPixel)

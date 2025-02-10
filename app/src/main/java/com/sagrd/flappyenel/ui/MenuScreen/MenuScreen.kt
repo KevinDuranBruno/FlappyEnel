@@ -23,6 +23,7 @@ import androidx.compose.material.TextButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,19 +38,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.toFontFamily
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.sagrd.flappyenel.R
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
 import com.sagrd.flappyenel.player
 import com.sagrd.flappyenel.toLogedUser
-import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
+import com.sagrd.flappyenel.data.local.storage.SessionStorage
 import com.sagrd.flappyenel.ui.LoginScreen.LoginModal
 import com.sagrd.flappyenel.ui.LoginScreen.LoginViewModel
 import com.sagrd.flappyenel.ui.RegisterScreen.RegisterModal
@@ -69,7 +73,9 @@ fun MenuScreen(
     loginViewModel : LoginViewModel = hiltViewModel(),
     registerViewModel: RegisterViewModel = hiltViewModel(),
     menuViewModel: MenuViewModel = hiltViewModel()
+
 ){
+    val lifecycleOwner = LocalLifecycleOwner.current
     val fontPixel = Font(R.font.pixelfont).toFontFamily()
     val musicOn = painterResource(id = R.drawable.soundbutton)
     val musicOff = painterResource(id = R.drawable.soundoffbutton)
@@ -78,6 +84,26 @@ fun MenuScreen(
     }
     if(exit){
         ExitModal(storage)
+    }
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_START -> {
+                    music.start()
+                    musicButtonPaint=musicOn
+                }
+                Lifecycle.Event.ON_STOP -> {
+                    music.pause()
+                    musicButtonPaint=musicOff
+                }
+                else -> {}
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
     }
     Column(modifier = Modifier
         .fillMaxSize()
@@ -201,7 +227,7 @@ fun ExitModal(
                             player = JugadorDto(0,"","","",0)
                         }
                     }) {
-                        Text(text = "SI", fontFamily = fontPixel,style = MaterialTheme.typography.h5, color = Color.Red)
+                        Text(text = "YES", fontFamily = fontPixel,style = MaterialTheme.typography.h5, color = Color.Red)
                     }
                     TextButton(onClick = { exit = false }) {
                         Text(text = "NO", fontFamily = fontPixel,color = Color.Black,style = MaterialTheme.typography.h5)
